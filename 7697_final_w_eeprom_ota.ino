@@ -11,9 +11,9 @@
 #include <LBLE.h>
 #include <LBLEPeriphral.h>
 
-
+ 
 char server[] = "www2.nkfust.edu.tw";
-float board_firmware_version = 0.93;
+float board_firmware_version = 0.94;
 
 
 //下面都是bitmap圖
@@ -1652,15 +1652,15 @@ void setup() {
     delay(100);
   }
   Serial.println("BLE ready");
-  //  Serial.print("Device Address = [");
-  //  Serial.print(LBLE.getDeviceAddress());
+    Serial.print("Device Address: ");
+    Serial.println(LBLE.getDeviceAddress());
   //  Serial.println("]");
 
   String deviceMacAddr = LBLE.getDeviceAddress().toString();
-  String deviceID = String(deviceMacAddr.substring(9, 11) + deviceMacAddr.substring(12, 14) + deviceMacAddr.substring(15, 17));
+  String deviceID = String(deviceMacAddr.substring(0, 2) + deviceMacAddr.substring(3, 5) + deviceMacAddr.substring(15, 17));
   String deviceName = String("eBoard_" + deviceID);
   Serial.print("Device name: ");
-  Serial.println(deviceName);
+  Serial.println(deviceName.c_str());
 
   LBLEAdvertisementData advertisement;
   advertisement.configAsConnectableDevice(deviceName.c_str());
